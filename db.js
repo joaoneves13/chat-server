@@ -4,9 +4,9 @@ const databaseUrl = "postgres://postgres:password@localhost:5432/postgres";
 const db = new Sequelize(databaseUrl);
 
 db
-.sync( {force: false} )
+.sync({ force: false })
 .then(() => {
-    console.log('DB connected');  
-})
+  console.log("DB connected");
+});
 
-module.exports = db
+module.exports = db;
