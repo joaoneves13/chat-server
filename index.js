@@ -24,7 +24,11 @@ app.get('/stream',
 async (req, res, next) => {
     try {
     const messages = await Message.findAll() // Get array out of DB
-    const string = JSON.stringify(messages) // Convert array into a string - 'serealize' it
+    const action = {
+        type: 'ALL_MESSAGES',
+        payload: messages
+    }
+    const string = JSON.stringify(action) // Convert array into a string - 'serealize' it
     stream.updateInit(string) // Prepare string to be sent to client right after they connect
     stream.init(req, res) // *Connect* the user to the stream
 } catch (error) {

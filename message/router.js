@@ -16,7 +16,11 @@ function factory(stream) {
   async function onPost(req, res, next) {
     try {
       const message = await Message.create(req.body);
-      const string = JSON.stringify(message)
+      const action = {
+          type: 'NEW_MESSAGE',
+          payload: message
+      }
+      const string = JSON.stringify(action)
       stream.send(string)
       res.send(message);
     } catch (error) {
@@ -28,4 +32,6 @@ function factory(stream) {
 
   return router;
 }
+
+
 module.exports = factory;
