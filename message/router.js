@@ -10,4 +10,11 @@ router.get('/message', (req, res, next) => {
     .catch(next)
 })
 
+router.post('/message', (req, res, next) => {
+    Message
+    .create(req.body)
+    .then(message => {res.send(message)})
+    .catch(next)
+})
+
 module.exports = router
