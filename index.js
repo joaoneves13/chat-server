@@ -3,6 +3,7 @@ const app = express();
 const port = 4000;
 const messageRouterFactory = require('./message/router')
 const bodyParser = require('body-parser')
+const cors = require('cors')
 const Sse = require('json-sse')
 const Message = require('./message/model')
 
@@ -11,11 +12,13 @@ const stream = new Sse();
 
 const messageRouter = messageRouterFactory(stream);
 
+const corsMiddleware = cors()
+app.use(corsMiddleware)
+
 app.get('/', (req, res) => {
     stream.send('Hi')
     res.send('Hello')
 })
-
 
 app.get('/stream', 
 async (req, res, next) => {
@@ -28,6 +31,8 @@ async (req, res, next) => {
     next(error) // Handle any errors
 }
 })
+
+
 
 const jsonParser = bodyParser.json()
 app.use(jsonParser)
