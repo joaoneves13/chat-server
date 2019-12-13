@@ -24,6 +24,7 @@ app.get('/stream',
 async (req, res, next) => {
     try {
     const messages = await Message.findAll() // Get array out of DB
+    
     const action = {
         type: 'ALL_MESSAGES',
         payload: messages

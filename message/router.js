@@ -16,6 +16,7 @@ function factory(stream) {
   async function onPost(req, res, next) {
     try {
       const message = await Message.create(req.body);
+      
       const action = {
           type: 'NEW_MESSAGE',
           payload: message
